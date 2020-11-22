@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>MK gallery</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </head>
+
+    <body>
+
+	    <style>
+
+	    	body {
+	    		background-image: url('mk_fondo.jpg');
+	    		background-repeat: no-repeat;
+	    		background-size: cover;
+	    	}
+
+	    	h1 {
+	    		font-size: 30px;
+	    		font-family: monospace;
+	    		font-weight: 900;
+	    		margin-top: 20px;
+	    	}
+
+	    	button {
+	    		margin-top: 20px;
+	    		background-color: red;
+	    		color: black;
+	    		font-family: monospace;
+	    		font-weight: 900;
+	    		width: 200px;
+	    	}
+
+			#divBorderImg {
+				margin-top: 30px;
+				width: 400px;
+				height: 550px;
+				padding: 5% 0;
+			}
+
+			#divImg {
+				width: 100%;
+				height: 100%;	
+				padding: 5% 0;
+			}
+	    	
+		</style>
+
+	    <button class="btn center-block animate__animated animate__bounceInDown">CHOOSE YOUR FIGHTER</button>
+
+	    <div id="divBorderImg" class="center-block">
+	    	<div id="divImg">
+	    		<img id="mk" class="img-responsive center-block  animate__animated animate__flip" src="mk_logo.png">
+	    	</div>
+		</div>
+		
+	    <h1 class="text-center animate__animated animate__zoomIn"></h1>
+
+	    <audio id="audio">
+			<source src="" type="audio/mpeg">
+        </audio>
+	    	
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+		<script>
+
+			let luchadores = [
+								{imagen: "subZero.jpg", nombre: "Sub-Zero",estilo: {"color":"white"}, audio: "subZero.mp3"},
+
+								{imagen:"scorpion.jpg",nombre: "Scorpion",estilo: {"color":"yellow"},audio: "scorpion.mp3"},
+
+								{ imagen:"liuKang.jpg", nombre: "Liu Kang", estilo: {"color":"red"}, audio: "liuKang.mp3"},
+
+								{ imagen:"kungLao.jpg", nombre: "Kung Lao", estilo: {"color":"white"}, audio:"kungLao.mp3"},
+
+								{imagen:"jax.jpg", nombre: "Jax", estilo: {"color":"grey"}, audio: "jax.mp3"},
+
+								{imagen:"raiden.png",nombre: "Raiden",estilo: {"color":"white"},audio: "raiden.mp3"},
+
+								{imagen:"shangTsung.jpg", nombre: "Shang Tsung", estilo: {"color":"red"},audio: "shangTsung.mp3"},
+
+								{imagen:"reptile.jpg",nombre: "Reptile",estilo: {"color":"green"},audio: "reptile.mp3"},
+
+								{imagen:"mileena.jpg",nombre: "Mileena",estilo: {"color":"violet"},audio: "mileena.mp3"},
+
+								{imagen:"kitana.jpg",nombre: "Kitana",estilo: {"color":"blue"},audio: "kitana.mp3"},
+
+								{imagen:"johnnyCage.jpg",nombre: "Johnny Cage",estilo: {"color":"white"},audio: "johnnyCage.mp3"}
+
+							]
+
+			function mostrarLuchador(fuente) {
+				$("#divImg").css("background-image", "url('" + fuente + "')")
+				$("#divImg").css("background-repeat", "no-repeat")
+				$("#divImg").css("background-size", "cover")
+				$("#divImg").fadeIn(1000)
+			}
+
+			function mostrarNombre(texto,estilo) {
+				$("h1").fadeIn(1000)
+				$("h1").text(texto)
+				$("h1").css(estilo)
+			}
+
+			function reproducirAudio(audioSource) {
+                audio.src = audioSource
+                audio.play()
+            }
+
+
+			let indice = 0;
+
+			$("button").click(function() {
+				$("button").text("ANOTHER FIGHTER")
+				$("button").removeClass("animate__bounceInDown")
+				$("button").addClass("animate__pulse")
+				$("button").addClass("animate__infinite infinite")
+				$("#divBorderImg").css("border", "5px solid white")
+				$("#divBorderImg").css("background-color", "black")
+				$("#divBorderImg").css("padding", "0px")
+				$("#divImg").css("padding", "0px")
+				$("#mk").hide()
+				$("#divImg").hide()
+				$("h1").hide()
+				if(indice < luchadores.length) { 
+					reproducirAudio(luchadores[indice].audio)
+					mostrarLuchador(luchadores[indice].imagen)
+					mostrarNombre(luchadores[indice].nombre, luchadores[indice].estilo)
+				} else {
+					window.location.reload(true);
+				}
+				indice++
+			})
+
+	    </script>
+	</body>
+</html>
